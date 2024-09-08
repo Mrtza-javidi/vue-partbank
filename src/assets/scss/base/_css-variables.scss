@@ -1,0 +1,19 @@
+@use '../abstracts/variables' as *;
+
+:root {
+  @each $name, $color in $palette {
+    --#{$name}: #{$color};
+  }
+
+  @each $property, $space in $spacing {
+    --#{$property}: #{$space};
+  }
+
+  @each $radius, $size in $borderRadius {
+    --#{$radius}: #{$size};
+  }
+
+  @each $boxShadow, $value in $boxShadows {
+    --#{$boxShadow}: #{$value};
+  }
+}

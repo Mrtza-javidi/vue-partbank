@@ -1,0 +1,99 @@
+@use "variables" as *;
+
+// font
+@mixin font-style(
+  $size: 1.6rem,
+  $family: false,
+  $color: var(--text-title),
+  $align: false,
+  $weight: false,
+  $line-height: false
+) {
+  font-size: $size;
+  color: $color;
+
+  @if $family {
+    font-family: $family;
+  }
+
+  @if $align {
+    text-align: $align;
+  }
+
+  @if $line-height {
+    line-height: $line-height;
+  }
+
+  @if $weight {
+    font-weight: $weight;
+  }
+}
+
+// // width and height
+// @mixin element-size($width: 100%, $height: fit-content) {
+//   width: $width;
+//   height: $height;
+// }
+
+// flex
+@mixin flex(
+  $display: flex,
+  $justify: center,
+  $align: center,
+  $direction: false,
+  $gap: false,
+  $wrap: false
+) {
+  display: $display;
+  justify-content: $justify;
+  align-items: $align;
+
+  @if $direction {
+    flex-direction: $direction;
+  }
+
+  @if $gap {
+    gap: $gap;
+  }
+
+  @if $wrap {
+    flex-wrap: $wrap;
+  }
+}
+
+// position
+@mixin position(
+  $position: relative,
+  $top: 0,
+  $right: 0,
+  $bottom: false,
+  $left: false,
+  $z-index: false
+) {
+  position: $position;
+  top: $top;
+  right: $right;
+
+  @if $bottom {
+    bottom: $bottom;
+  }
+
+  @if $left {
+    left: $left;
+  }
+
+  @if $z-index {
+    z-index: $z-index;
+  }
+}
+
+// media query
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakPoints, $breakpoint) {
+    @media (max-width: map-get($breakPoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint #{$breakpoint} not found in \$breakPoints map.";
+  }
+}
