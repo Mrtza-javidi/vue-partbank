@@ -3,18 +3,18 @@ html {
 }
 
 body {
-  font-family: 'peyda-400', sans-serif;
+  font-family: "peyda-400", sans-serif;
   overflow-x: hidden;
   color: var(--text-title);
 }
 
 button {
   cursor: pointer;
-  font-family: 'peyda-400';
+  font-family: "peyda-400";
 }
 
 ::placeholder {
   color: var(--black-100);
-  font-family: 'peyda-400';
+  font-family: "peyda-400";
   opacity: 0.9;
 }
