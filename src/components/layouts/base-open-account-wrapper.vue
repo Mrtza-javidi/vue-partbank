@@ -1,15 +1,15 @@
 <template>
-  <section :class="['wrapper', customClass]">
+  <section :class="['wrapper', wrapperCustomClass]">
     <h1 class="wrapper__header">{{ title }}</h1>
     <hr />
     <slot name="wrapper-main"></slot>
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 defineProps({
   title: String,
-  customClass: String
+  wrapperCustomClass: String,
 });
 </script>
 
@@ -22,7 +22,7 @@ defineProps({
   background: var(--surface);
 
   &__header {
-    @include font-style($size: 2rem, $family: 'peyda-700', $weight: normal);
+    @include font-style($size: 2rem, $family: "peyda-700", $weight: normal);
   }
 }
 </style>

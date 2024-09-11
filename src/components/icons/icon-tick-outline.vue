@@ -19,7 +19,11 @@
 </template>
 
 <script setup lang="ts">
+import { PropType } from "vue";
+
+type ClassType = string | string[] | object;
+
 defineProps({
-  customClass: String,
+  customClass: { type: [String, Array, Object] as PropType<ClassType> },
 });
 </script>

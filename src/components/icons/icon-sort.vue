@@ -17,8 +17,12 @@
 </template>
 
 <script setup lang="ts">
+import { PropType } from "vue";
+
+type ClassType = string | string[] | object;
+
 defineProps({
   color: { type: String, default: "#8999B9" },
-  customClass: String,
+  customClass: { type: [String, Array, Object] as PropType<ClassType> },
 });
 </script>

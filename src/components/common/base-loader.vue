@@ -2,7 +2,7 @@
   <span v-if="isLoading" :class="['loader', customClass]"></span>
 </template>
 
-<script setup>
+<script setup lang="ts">
 defineProps({
   isLoading: Boolean,
   customClass: String,

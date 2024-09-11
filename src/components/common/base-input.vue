@@ -5,10 +5,7 @@
       <input
         :type="computedType"
         :id="id"
-        :class="[
-          'input-container__input',
-          { 'input-container__input--password': isPassword },
-        ]"
+        :class="inputClass"
         :placeholder="placeholder"
         :value="modelValue"
         @input="(event: any) => emit('update:modelValue', event.target.value)"
@@ -30,7 +27,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
-import ClosedEye from "@/components/icons/closed-eye.vue";
+import ClosedEye from "@/components/icons/icon-closed-eye.vue";
 import OpenEye from "@/components/icons/open-eye.vue";
 
 const props = defineProps({
@@ -50,6 +47,11 @@ const emit = defineEmits(["update:modelValue"]);
 
 const showPassword = ref<boolean>(false);
 const error = ref("");
+
+const inputClass = computed(() => [
+  "input-container__input",
+  { "input-container__input--password": isPassword },
+]);
 
 watch(
   () => props.modelValue,
