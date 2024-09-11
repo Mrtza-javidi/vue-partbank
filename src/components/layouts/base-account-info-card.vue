@@ -1,5 +1,5 @@
 <template>
-  <div class="account-info" :class="customClass">
+  <div :class="['account-info', accountInfoCustomClass]">
     <div class="account-info__header">
       <span class="account-info__header-title">{{ title }}</span>
 
@@ -10,10 +10,10 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 defineProps({
   title: String,
-  customClass: String,
+  accountInfoCustomClass: String,
 });
 </script>
 

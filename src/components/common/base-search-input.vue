@@ -9,14 +9,12 @@
       placeholder="جستجو"
     />
     <span :class="['search-box__icon-container', iconContainerCustomClass]">
-      <svg viewBox="0 0 20 20" :class="['search-box__icon', iconCustomClass]">
-        <use href="@/assets/icons/serach.svg#Search" />
-      </svg>
+      <icon-search :customClass="['search-box__icon', iconCustomClass]" />
     </span>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const query = defineModel("modelValue", { type: String, default: "" });
 
 defineProps({
@@ -48,16 +46,15 @@ defineProps({
   }
 
   &__icon-container {
-    @include position($position: absolute, $left: 0, $right: initial);
-    display: flex;
+    @include flex;
     padding: var(--p-1);
     border-radius: 6px 0px 0px 6px;
     background-color: var(--primary-50);
   }
 
   &__icon {
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 100%;
+    height: 100%;
     stroke: var(--primary-color);
   }
 

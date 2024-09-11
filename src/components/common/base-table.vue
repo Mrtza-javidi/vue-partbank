@@ -1,6 +1,6 @@
 <template>
   <table class="table" :class="tableCustomClass">
-    <thead class="table__row table__header-row">
+    <thead>
       <slot name="header" />
     </thead>
     <tbody class="table__body">
@@ -9,13 +9,9 @@
   </table>
 </template>
 
-<script setup>
+<script setup lang="ts">
 defineProps({
   tableCustomClass: String,
-  headerRowCustomClass: { type: String, default: "table__header-row" },
-  headerDataCustomClass: { type: String, default: "table__header-data" },
-  bodyRowCustomClass: { type: String, default: "table__row" },
-  bodyDataCustomClass: { type: String, default: "table__data" },
 });
 </script>
 
@@ -30,7 +26,7 @@ defineProps({
     min-width: 40rem;
   }
 
-  &__header-data {
+  :deep(.table__header-data) {
     @include font-style(
       $size: 1.6rem,
       $family: "peyda-600",
@@ -43,7 +39,7 @@ defineProps({
     width: 100%;
   }
 
-  &__header-row {
+  :deep(.table__header-row) {
     background-color: var(--primary-color);
   }
 
@@ -53,7 +49,7 @@ defineProps({
     }
   }
 
-  &__row {
+  :deep(.table__row) {
     @include flex($gap: var(--g-1));
     height: 6rem;
     border-radius: var(--radius-8);
@@ -64,7 +60,7 @@ defineProps({
     }
   }
 
-  &__data {
+  :deep(.table__data) {
     @include flex;
     @include font-style($size: 1.6rem);
     width: 100%;

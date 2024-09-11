@@ -1,6 +1,6 @@
 <template>
   <div class="file-picker">
-    <div class="file-picker__container" :style="customStyle">
+    <div :class="['file-picker__container', containerCustomClass]">
       <img
         :src="imageUrl"
         alt="national-card front"
@@ -80,49 +80,55 @@
   </teleport>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from "vue";
-import { useClickOutside } from "@/composables/click-outside";
 
-const actionsMenu = ref(null);
-const { isClickedOutside } = useClickOutside(actionsMenu);
-watch(isClickedOutside, (outside) => {
-  if (outside) {
-    showActions.value = false;
-  }
-});
-const toggleActions = () => {
-  showActions.value = !showActions.value;
-};
-
-const emit = defineEmits(["update:modelValue", "fileError"]);
 const props = defineProps({
   text: { type: String, default: "تصویر کارت ملی" },
-  customStyle: String,
+  containerCustomClass: String,
   modelValue: { type: Boolean, default: false },
 });
 
-const fileInput = ref(null);
+const fileInput = ref<HTMLInputElement | null>(null);
 const showError = ref(false);
 const isFileSelected = ref(props.modelValue);
 const imageUrl = ref("");
 const isFilePickerValid = ref(false);
 const showActions = ref(false);
 
+const emit = defineEmits(["update:modelValue", "fileError"]);
+
+const actionsMenu = ref(null);
+
+const toggleActions = () => {
+  showActions.value = !showActions.value;
+};
+
 const triggerFileInput = () => {
-  fileInput.value.click();
+  fileInput.value && fileInput.value.click();
   showActions.value = false;
 };
 
-const handleFileChange = (event) => {
-  const file = event.target.files[0];
+const handleFileChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  const file = target.files ? target.files[0] : null;
   const validImageTypes = ["image/jpeg", "image/png", "image/webp"];
+  const maxFileSize = 2 * 1024 * 1024;
+
   if (!file || !validImageTypes.includes(file.type)) {
     showError.value = true;
     emit("fileError");
     emit("update:modelValue", false);
     return;
   }
+
+  if (file.size > maxFileSize) {
+    showError.value = true;
+    emit("fileError", "File size exceeds the 2MB limit");
+    emit("update:modelValue", false);
+    return;
+  }
+
   showError.value = false;
   isFilePickerValid.value = true;
   isFileSelected.value = true;
@@ -130,11 +136,13 @@ const handleFileChange = (event) => {
   emit("update:modelValue", true);
 };
 
-const readAndSaveFile = (file) => {
+const readAndSaveFile = (file: File) => {
   const reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = () => {
-    imageUrl.value = reader.result;
+    reader.result &&
+      typeof reader.result === "string" &&
+      (imageUrl.value = reader.result);
   };
 };
 

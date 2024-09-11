@@ -5546,7 +5546,9 @@ var PublicInstanceProxyHandlers = {
       setupState[key] = value;
       return true;
     } else if (setupState.__isScriptSetup && hasOwn(setupState, key)) {
-      warn$1(`Cannot mutate <script setup> binding "${key}" from Options API.`);
+      warn$1(
+        `Cannot mutate <script setup lang="ts"> binding "${key}" from Options API.`
+      );
       return false;
     } else if (data !== EMPTY_OBJ && hasOwn(data, key)) {
       data[key] = value;
@@ -5686,7 +5688,7 @@ function exposeSetupStateOnRenderContext(instance) {
 }
 var warnRuntimeUsage = (method) =>
   warn$1(
-    `${method}() is a compiler-hint helper that is only usable inside <script setup> of a single file component. Its arguments should be compiled away and passing it at runtime has no effect.`
+    `${method}() is a compiler-hint helper that is only usable inside <script setup lang="ts"> of a single file component. Its arguments should be compiled away and passing it at runtime has no effect.`
   );
 function defineProps() {
   if (true) {
@@ -6771,10 +6773,10 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
           shouldCast = isFunction(propType) && propType.name === "Boolean";
         }
         prop[0] =
-        /* shouldCast */
+          /* shouldCast */
           shouldCast;
         prop[1] =
-        /* shouldCastTrue */
+          /* shouldCastTrue */
           shouldCastTrue;
         if (shouldCast || hasOwn(prop, "default")) {
           needCastKeys.push(normalizedKey);

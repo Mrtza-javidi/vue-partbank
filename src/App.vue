@@ -1,12 +1,9 @@
 <template>
-  <base-menu direction="__actions-container--bottom" />
+  <!-- <router-view /> -->
+  <!-- <base-toast /> -->
 </template>
 
-<script setup lang="ts">
-import { ref } from "vue";
-
-const inputValue = ref("");
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss">
 .auto-set {

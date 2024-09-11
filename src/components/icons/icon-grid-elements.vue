@@ -4,6 +4,7 @@
     height="20"
     viewBox="0 0 20 20"
     :fill="color"
+    :class="customClass"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
@@ -22,7 +23,12 @@
 </template>
 
 <script setup lang="ts">
+import { PropType } from "vue";
+
+type ClassType = string | string[] | object;
+
 defineProps({
   color: { type: String, default: "#3C4351" },
+  customClass: { type: [String, Array, Object] as PropType<ClassType> },
 });
 </script>

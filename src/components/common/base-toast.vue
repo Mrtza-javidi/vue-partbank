@@ -5,9 +5,9 @@
   </div>
 </template>
 
-<script setup>
-import SuccessIcon from "@/components/icons/TickOutline.vue";
-import ErrorIcon from "@/components/icons/ErrorOutline.vue";
+<script setup lang="ts">
+import SuccessIcon from "@/components/icons/icon-tick-outline.vue";
+import ErrorIcon from "@/components/icons/icon-error-outline.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -25,7 +25,8 @@ import ErrorIcon from "@/components/icons/ErrorOutline.vue";
   border-radius: 16px;
 
   &__icon {
-    @include element-size($width: 2.4rem, $height: 2.4rem);
+    width: 2.4rem;
+    height: 2.4rem;
   }
 }
 
