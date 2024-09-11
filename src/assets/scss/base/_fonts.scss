@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'peyda-400';
+  src:
+    url(@/assets/fonts/peyda/eot/PeydaWeb-Regular.eot) format('embedded-opentype'),
+    url(@/assets/fonts/peyda/ttf/Peyda-Regular.ttf) format('truetype'),
+    url(@/assets/fonts/peyda/woff/PeydaWeb-Regular.woff) format('woff'),
+    url(@/assets/fonts/peyda/woff2/PeydaWeb-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'peyda-500';
+  src:
+    url(@/assets/fonts/peyda/eot/PeydaWeb-Medium.eot) format('embedded-opentype'),
+    url(@/assets/fonts/peyda/ttf/Peyda-Medium.ttf) format('truetype'),
+    url(@/assets/fonts/peyda/woff/PeydaWeb-Medium.woff) format('woff'),
+    url(@/assets/fonts/peyda/woff2/PeydaWeb-Medium.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'peyda-600';
+  src:
+    url(@/assets/fonts/peyda/eot/PeydaWeb-SemiBold.eot) format('embedded-opentype'),
+    url(@/assets/fonts/peyda/ttf/Peyda-SemiBold.ttf) format('truetype'),
+    url(@/assets/fonts/peyda/woff/PeydaWeb-SemiBold.woff) format('woff'),
+    url(@/assets/fonts/peyda/woff2/PeydaWeb-SemiBold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'peyda-700';
+  src:
+    url(@/assets/fonts/peyda/eot/PeydaWeb-Bold.eot) format('embedded-opentype'),
+    url(@/assets/fonts/peyda/ttf/Peyda-Bold.ttf) format('truetype'),
+    url(@/assets/fonts/peyda/woff/PeydaWeb-Bold.woff) format('woff'),
+    url(@/assets/fonts/peyda/woff2/PeydaWeb-Bold.woff2) format('woff2');
+}
