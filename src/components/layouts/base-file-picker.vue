@@ -82,6 +82,13 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
+import { useClickOutside } from "@/composables/click-outside";
+
+const actionsMenu = ref(null);
+const { isClickedOutside } = useClickOutside(actionsMenu);
+watch(isClickedOutside, (outside) => {
+  outside && (showActions.value = false);
+});
 
 const props = defineProps({
   text: { type: String, default: "تصویر کارت ملی" },
@@ -97,8 +104,6 @@ const isFilePickerValid = ref(false);
 const showActions = ref(false);
 
 const emit = defineEmits(["update:modelValue", "fileError"]);
-
-const actionsMenu = ref(null);
 
 const toggleActions = () => {
   showActions.value = !showActions.value;
