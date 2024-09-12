@@ -53,4 +53,5 @@ export function registerBaseComponents(app: App): void {
 
 export function registerLayouts(app: App): void {
   app.component("TheHeader", layoutLoader.TheHeader);
+  app.component("TheSidebar", layoutLoader.TheSidebar);
 }
