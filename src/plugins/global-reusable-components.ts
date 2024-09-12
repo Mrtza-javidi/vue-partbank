@@ -1,7 +1,8 @@
 import { App } from "vue";
-import * as componentLoader from "@/utils/reusableComponentsLoader";
+import * as componentLoader from "@/utils/components-loader/reusable-components-loader";
+import * as layoutLoader from "@/utils/components-loader/layouts-loader";
 
-export default function registerBaseComponents(app: App): void {
+export function registerBaseComponents(app: App): void {
   // common
   app.component("BaseButton", componentLoader.BaseButton);
   app.component("BaseLoader", componentLoader.BaseLoader);
@@ -48,4 +49,8 @@ export default function registerBaseComponents(app: App): void {
   app.component("IconUpload", componentLoader.Upload);
   app.component("IconWallet", componentLoader.Wallet);
   app.component("IconWithdraw", componentLoader.Withdraw);
+}
+
+export function registerLayouts(app: App): void {
+  app.component("TheHeader", layoutLoader.TheHeader);
 }
