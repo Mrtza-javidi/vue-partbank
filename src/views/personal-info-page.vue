@@ -67,13 +67,13 @@
             <div class="info-form__buttons-container">
               <base-button
                 text="قبلی"
-                class="btn-secondary"
+                customClass="btn-secondary"
                 @click.prevent="dashboardPage"
               >
               </base-button>
               <base-button
                 text="ثبت و ادامه"
-                class="btn-primary"
+                customClass="btn-primary"
                 @click.prevent="createAccount"
                 :isLoading="loading"
               >
@@ -132,15 +132,13 @@ const createAccount = () => {
   if (
     firstName.value === "مرتضی" &&
     lastName.value === "جاویدی" &&
-    postalCode.value === "۱۲۱۲۱۲۱۲۱۲" &&
+    (postalCode.value === "۱۲۱۲۱۲۱۲۱۲" || postalCode.value === "1212121212") &&
     address.value === "همین دور و بر"
   ) {
-    createAccountStore.createAccount(
-      firstName.value,
-      lastName.value,
-      postalCode.value,
-      address.value
-    );
+    createAccountStore.firstName = firstName.value;
+    createAccountStore.lastName = lastName.value;
+    createAccountStore.postalCode = postalCode.value;
+    createAccountStore.address = address.value;
     router.push("/file-picker");
   } else
     toastStore.showToast(
