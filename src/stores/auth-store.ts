@@ -24,7 +24,7 @@ export const useAuthStore = defineStore("auth", {
     async login(phoneNumber: string, password: string): Promise<any> {
       try {
         if (this.mockEnabled) {
-          if (phoneNumber === "۰۹۱۵۴۸۳۸۳۴۳" && password === "123456") {
+          if (phoneNumber === "۰۹۱۵۴۸۳۸۳۴۳" && password === "123456789") {
             const mockResponse = {
               idNumber: "0987654321",
             };
