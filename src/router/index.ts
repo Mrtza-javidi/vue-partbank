@@ -22,11 +22,11 @@ const routes: RouteRecordRaw[] = [
     name: "file-picker",
     component: () => import("@/views/file-picker-page.vue"),
   },
-  // {
-  //   path: "/confirm-info",
-  //   name: "confirm-info",
-  //   component: () => import("@/views/confirm-info-page.vue"),
-  // },
+  {
+    path: "/confirm-info",
+    name: "confirm-info",
+    component: () => import("@/views/confirm-info-page.vue"),
+  },
   // {
   //   path: "/:pathMatch(.*)*",
   //   name: "not-found",
