@@ -1,6 +1,6 @@
 <template>
   <div class="file-picker">
-    <div :class="['file-picker__container', containerCustomClass]">
+    <div class="file-picker__container">
       <img
         :src="imageUrl"
         alt="national-card front"
@@ -8,9 +8,7 @@
         v-show="isFileSelected"
       />
       <div class="file-picker__contents" v-show="!isFileSelected">
-        <svg viewBox="0 0 69 52" class="file-picker__upload-icon">
-          <use href="@/assets/icons/upload.svg#Upload"></use>
-        </svg>
+        <icon-upload customClass="file-picker__upload-icon" />
         <div>
           تصویر را بکشید و در اینجا رها کنید
           <br />
@@ -39,19 +37,18 @@
         ref="actionsMenu"
         class="file-picker__actions-image"
       >
-        <span class="file-picker__actions-more-icon" @click="toggleActions">
-          <svg viewBox="0 0 32 32">
-            <use href="@/assets/icons/more.svg#More" />
-          </svg>
+        <span @click="toggleActions">
+          <icon-more
+            customClass="file-picker__actions-more-icon"
+            color="var(--gray-gray)"
+          />
         </span>
         <div v-if="showActions" class="file-picker__actions-container">
           <button
             class="file-picker__button file-picker__button--edit"
             @click="triggerFileInput"
           >
-            <svg viewBox="0 0 20 20" class="file-picker__button-icon">
-              <use href="@/assets/icons/edit.svg#Edit" />
-            </svg>
+            <icon-edit customClass="file-picker__button-icon" />
             <p>ویرایش</p>
           </button>
           <hr />
@@ -59,12 +56,9 @@
             class="file-picker__button file-picker__button--delete"
             @click="handleDelete"
           >
-            <svg
-              viewBox="0 0 20 20"
-              class="file-picker__button-icon file-picker__button-icon--delete"
-            >
-              <use href="@/assets/icons/trash.svg#Trash" />
-            </svg>
+            <icon-trash
+              customClass="file-picker__button-icon file-picker__button-icon--delete"
+            />
             <p>حذف</p>
           </button>
         </div>
@@ -92,7 +86,6 @@ watch(isClickedOutside, (outside) => {
 
 const props = defineProps({
   text: { type: String, default: "تصویر کارت ملی" },
-  containerCustomClass: String,
   modelValue: { type: Boolean, default: false },
 });
 
@@ -118,7 +111,7 @@ const handleFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
   const file = target.files ? target.files[0] : null;
   const validImageTypes = ["image/jpeg", "image/png", "image/webp"];
-  const maxFileSize = 2 * 1024 * 1024;
+  const maxFileSize = 1 * 1024 * 1024;
 
   if (!file || !validImageTypes.includes(file.type)) {
     showError.value = true;
@@ -129,7 +122,7 @@ const handleFileChange = (event: Event) => {
 
   if (file.size > maxFileSize) {
     showError.value = true;
-    emit("fileError", "File size exceeds the 2MB limit");
+    emit("fileError", "File size exceeds the 1MB limit");
     emit("update:modelValue", false);
     return;
   }
@@ -177,6 +170,7 @@ watch(showError, (newVal) => {
 <style lang="scss" scoped>
 .file-picker {
   position: relative;
+  width: 32rem;
   overflow: hidden;
   border-radius: var(--radius-8);
 
@@ -212,6 +206,7 @@ watch(showError, (newVal) => {
   }
 
   &__id-image {
+    width: 100%;
     height: 100%;
   }
 
@@ -246,17 +241,13 @@ watch(showError, (newVal) => {
     display: flex;
     flex-direction: column;
     width: 2rem;
-    fill: var(--gray-gray);
     cursor: pointer;
   }
 
   &__actions-more-icon {
     display: flex;
-  }
-
-  &__actions-container--show {
-    visibility: visible;
-    opacity: 1;
+    width: 2rem;
+    height: 2rem;
   }
 
   &__button {
