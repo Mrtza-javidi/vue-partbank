@@ -8,7 +8,7 @@
         :class="inputClass"
         :placeholder="placeholder"
         :value="modelValue"
-        @input="(event: any) => emit('update:modelValue', event.target.value)"
+        @input="handleInput"
         :ref="regexType"
         :autofocus="autofocus"
       />
@@ -26,9 +26,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
-import ClosedEye from "@/components/icons/icon-closed-eye.vue";
-import OpenEye from "@/components/icons/open-eye.vue";
+import { ref, computed, watch, defineAsyncComponent } from "vue";
+
+const ClosedEye = defineAsyncComponent(
+  () => import(`@/components/icons/icon-closed-eye.vue`)
+);
+const OpenEye = defineAsyncComponent(
+  () => import(`@/components/icons/icon-open-eye.vue`)
+);
 
 const props = defineProps({
   modelValue: String,
@@ -43,10 +48,10 @@ const props = defineProps({
   regexType: { type: String, required: true },
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "validationCheck"]);
 
 const showPassword = ref<boolean>(false);
-const error = ref("");
+const error = ref<string>("");
 
 const inputClass = computed(() => [
   "input-container__input",
@@ -78,8 +83,8 @@ const regexes = [
   },
   {
     key: "phoneNumber",
-    regex: /^((09[0-9]{9})|(۰۹[۰-۹]{9}))$/,
-    errmsg: "شماره تلفن باید با پیش شماره ۰۹ شروع شود و شامل ۱۱ عدد باشد",
+    regex: /^(۰۹)([۰-۹]{9})$/,
+    errmsg: "شماره تلفن باید با پیش شماره ۰۹ شروع شود و شامل ۱۱ عدد فارسی باشد",
   },
   {
     key: "email",
@@ -97,21 +102,32 @@ const regexes = [
     errmsg: "آدرس باید فارسی و حداقل شامل ۵ کاراکتر باشد",
   },
 ];
+const handleInput = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  const value = target.value;
+  emit("update:modelValue", value);
+  validateInput();
+};
 
 const validateInput = () => {
   error.value = "";
 
   const modelValue = props.modelValue || "";
-  regexes.forEach(({ key, regex, errmsg }) => {
-    if (props.regexType === key)
-      if (!regex.test(modelValue)) {
-        error.value = errmsg;
-      }
-  });
+  const matchedRegex = regexes.find(({ key }) => props.regexType === key);
 
-  if (props.required && (!props.modelValue || props.modelValue.trim() === "")) {
+  if (props.required && (!modelValue || modelValue.trim() === "")) {
     error.value = "پر کردن این ورودی الزامی است";
+    emit("validationCheck", false);
+    return;
   }
+
+  if (matchedRegex && !matchedRegex.regex.test(modelValue)) {
+    error.value = matchedRegex.errmsg;
+    emit("validationCheck", false); // Emit false if the validation fails
+    return;
+  }
+
+  emit("validationCheck", true);
 };
 </script>
 
@@ -131,7 +147,6 @@ const validateInput = () => {
   @include flex($align: stretch, $direction: column, $gap: var(--g-2));
   position: relative;
   width: 100%;
-  margin-bottom: 1.5rem;
 
   &__input-wrapper {
     @include flex($align: center, $direction: row, $gap: var(--g-1));
@@ -153,13 +168,13 @@ const validateInput = () => {
 
     &-error {
       color: var(--fail-500);
-      @include position($position: absolute, $top: initial, $bottom: -1.5rem);
+      @include position($position: absolute, $top: initial, $bottom: -2rem);
     }
   }
 
   &__input-icon {
     @include position(
-      $position: relative,
+      $position: absolute,
       $top: 50%,
       $left: 0.8rem,
       $right: initial
