@@ -7,6 +7,7 @@ export function registerBaseComponents(app: App): void {
   app.component("BaseButton", componentLoader.BaseButton);
   app.component("BaseLoader", componentLoader.BaseLoader);
   app.component("BaseInput", componentLoader.BaseInput);
+  app.component("BaseTextarea", componentLoader.BaseTextarea);
   app.component("BaseTable", componentLoader.BaseTable);
   app.component("BasePagination", componentLoader.BasePagination);
   app.component("BaseSearchInput", componentLoader.BaseSearchInput);
@@ -17,7 +18,10 @@ export function registerBaseComponents(app: App): void {
   app.component("BaseAccountInfo", componentLoader.BaseAccountInfo);
   app.component("BaseBankCard", componentLoader.BaseBankCard);
   app.component("BaseFilePicker", componentLoader.BaseFilePicker);
-  app.component("BaseOpenAccount", componentLoader.BaseOpenAccount);
+  app.component(
+    "BaseOpenAccountWrapper",
+    componentLoader.BaseOpenAccountWrapper
+  );
 
   // icons
   app.component("IconGridElements", componentLoader.GridElements);
