@@ -4,13 +4,15 @@
     <div class="input-container__input-wrapper">
       <input
         :type="computedType"
+        :name="name"
         :id="id"
         :class="inputClass"
         :placeholder="placeholder"
+        :required="required"
+        :autofocus="autofocus"
         :value="modelValue"
         @input="handleInput"
         :ref="regexType"
-        :autofocus="autofocus"
       />
       <component
         v-if="isPassword"
@@ -55,7 +57,7 @@ const error = ref<string>("");
 
 const inputClass = computed(() => [
   "input-container__input",
-  { "input-container__input--password": isPassword },
+  { "input-container__input--password": props.type === "password" },
 ]);
 
 watch(
@@ -92,14 +94,14 @@ const regexes = [
     errmsg: "ایمیل وارد شده معتبر نمیباشد. کاراکتر های وارد شده را بررسی کنید",
   },
   {
+    key: "name",
+    regex: /^([\u0600-\u06FF\s]+)$/,
+    errmsg: "نام باید شامل حروف فارسی باشد",
+  },
+  {
     key: "postalCode",
     regex: /^(([0-9]{10})|([۰-۹]{10}))$/,
     errmsg: "کدپستی باید۱۰ رقمی باشد",
-  },
-  {
-    key: "address",
-    regex: /^[\u0600-\u06FF\s\-]{10,}$/,
-    errmsg: "آدرس باید فارسی و حداقل شامل ۵ کاراکتر باشد",
   },
 ];
 const handleInput = (event: Event) => {
