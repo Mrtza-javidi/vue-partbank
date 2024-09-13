@@ -33,11 +33,13 @@ export const useAuthStore = defineStore("auth", {
               firstName: string;
               lastName: string;
             }
-            const { firstName, lastName }: PersonalInfo = JSON.parse(
-              localStorage.get("create-account")
-            );
-            this.firstName = firstName;
-            this.lastName = lastName;
+            const storedData = localStorage.getItem("create-account");
+            if (storedData) {
+              const { firstName, lastName }: PersonalInfo =
+                JSON.parse(storedData);
+              this.firstName = firstName;
+              this.lastName = lastName;
+            }
             this.idNumber = mockResponse.idNumber;
             this.uniqueKey = mockResponse.uniqueKey;
             this.isAuthenticated = true;

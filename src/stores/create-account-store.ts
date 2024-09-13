@@ -40,7 +40,7 @@ export const useCreateAccount = defineStore("create-account", {
             const mockResponse = {
               firstName: "مرتضی",
               lastName: "جاویدی",
-              postalCode: "۱۲۱۲۱۲۱۲۱۲",
+              postalCode: "1212121212",
               address: "همین دور و بر",
             };
             this.firstName = mockResponse.firstName;
@@ -81,7 +81,6 @@ export const useCreateAccount = defineStore("create-account", {
       {
         key: "create-account",
         storage: localStorage,
-        paths: ["firstName", "lastName", "postalCode", "address"],
       },
     ],
   },
