@@ -25,13 +25,13 @@
             <div class="card-item__buttons-container">
               <base-button
                 text="قبلی"
-                class="btn-secondary"
+                customClass="btn-secondary"
                 @click.prevent="personalInfoPage"
               >
               </base-button>
               <base-button
                 text="ثبت و ادامه"
-                class="btn-primary"
+                customClass="btn-primary"
                 @click.prevent="submitForm"
               >
               </base-button>

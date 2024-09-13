@@ -34,7 +34,7 @@ export const useCreateAccount = defineStore("create-account", {
           if (
             firstName === "مرتضی" &&
             lastName === "جاویدی" &&
-            postalCode === "۱۲۱۲۱۲۱۲۱۲" &&
+            postalCode === "1212121212" &&
             address === "همین دور و بر"
           ) {
             const mockResponse = {
