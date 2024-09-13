@@ -9,6 +9,7 @@ export const loadComponent = (folder: string, componentName: string) =>
 export const BaseButton = loadComponent("common", "base-button");
 export const BaseLoader = loadComponent("common", "base-loader");
 export const BaseInput = loadComponent("common", "base-input");
+export const BaseTextarea = loadComponent("common", "base-textarea");
 export const BaseTable = loadComponent("common", "base-table");
 export const BasePagination = loadComponent("common", "base-pagination");
 export const BaseSearchInput = loadComponent("common", "base-search-input");
@@ -19,7 +20,10 @@ export const BaseSidebarButton = loadComponent("common", "base-sidebar-button");
 export const BaseAccountInfo = loadComponent("layouts", "base-account-info");
 export const BaseBankCard = loadComponent("layouts", "base-bank-card");
 export const BaseFilePicker = loadComponent("layouts", "base-file-picker");
-export const BaseOpenAccount = loadComponent("layouts", "base-open-account");
+export const BaseOpenAccountWrapper = loadComponent(
+  "layouts",
+  "base-open-account-wrapper"
+);
 
 // icons
 export const GridElements = loadComponent("icons", "icon-grid-elements");

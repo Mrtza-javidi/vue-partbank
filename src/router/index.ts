@@ -12,11 +12,11 @@ const routes: RouteRecordRaw[] = [
   //   name: "dashboard",
   //   component: () => import("@/views/dashboard-page.vue"),
   // },
-  // {
-  //   path: "/personal-info",
-  //   name: "personal-info",
-  //   component: () => import("@/views/personal-info-page.vue"),
-  // },
+  {
+    path: "/personal-info",
+    name: "personal-info",
+    component: () => import("@/views/personal-info-page.vue"),
+  },
   // {
   //   path: "/file-picker",
   //   name: "file-picker",

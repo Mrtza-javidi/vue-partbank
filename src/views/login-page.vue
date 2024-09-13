@@ -3,23 +3,7 @@
     <section class="login">
       <div class="login__contents login-contents-container">
         <div class="login-contents-container__header">
-          <!-- <svg viewBox="0 0 97 93" class="login-contents-container__logo">
-            <use
-              class="login-contents-container__logo-path-1"
-              href="@/assets/icons/logo.svg#Vector1"
-            />
-            <use
-              class="login-contents-container__logo-path-2"
-              href="@/assets/icons/logo.svg#Vector2"
-            />
-            <use
-              class="login-contents-container__logo-path-3"
-              href="@/assets/icons/logo.svg#Vector3"
-            />
-          </svg> -->
-
           <icon-logo customClass="login-contents-container__logo" />
-
           <div class="login-contents-container__title-container">
             <h1 class="login-contents-container__title">پارت بانک</h1>
             <p class="login-contents-container__title-description">
@@ -102,7 +86,7 @@ const validations = ref({
 const handleLogin = () => {
   if (!validations.value.phoneNumber || !validations.value.password) {
     toastStore.showToast(
-      "مقادیر فیلد(ها) به درستی وارد نشده است. لطفا دوباره تلاش کنید",
+      "خطایی رخ داده است. فیلد هارا دوباره بررسی کنید",
       "error"
     );
     return;
@@ -111,16 +95,16 @@ const handleLogin = () => {
   loading.value = true;
   setTimeout(() => {
     if (phoneNumber.value === "۰۹۱۵۴۸۳۸۳۴۳" && password.value === "123456789") {
-      const convertedPhoneNumber = convertFarsiToEnglishNumbers(
+      const toEnglishPhoneNumber = convertFarsiToEnglishNumbers(
         phoneNumber.value
       );
       authStore.login(phoneNumber.value, password.value);
       toastStore.showToast("ورود شما با موفقیت انجام شد!", "success");
-      localStorage.setItem("phoneNumber", convertedPhoneNumber);
+      localStorage.setItem("phoneNumber", toEnglishPhoneNumber);
       router.push("/dashboard");
     } else
       toastStore.showToast(
-        "اطلاعات وارد شده درست نمیباشد. دوباره تلاش کنید.",
+        "اطلاعات وارد شده مطابق با mock data نمیباشد. دوباره تلاش کنید.",
         "error"
       );
 

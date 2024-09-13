@@ -27,8 +27,21 @@ export const useAuthStore = defineStore("auth", {
           if (phoneNumber === "۰۹۱۵۴۸۳۸۳۴۳" && password === "123456789") {
             const mockResponse = {
               idNumber: "0987654321",
+              uniqueKey: "3e0a3323-a5a8-4bd8-b61e-170724d34212",
             };
+            interface PersonalInfo {
+              firstName: string;
+              lastName: string;
+            }
+            const storedData = localStorage.getItem("create-account");
+            if (storedData) {
+              const { firstName, lastName }: PersonalInfo =
+                JSON.parse(storedData);
+              this.firstName = firstName;
+              this.lastName = lastName;
+            }
             this.idNumber = mockResponse.idNumber;
+            this.uniqueKey = mockResponse.uniqueKey;
             this.isAuthenticated = true;
 
             return mockResponse;
