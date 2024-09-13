@@ -17,11 +17,11 @@ const routes: RouteRecordRaw[] = [
     name: "personal-info",
     component: () => import("@/views/personal-info-page.vue"),
   },
-  // {
-  //   path: "/file-picker",
-  //   name: "file-picker",
-  //   component: () => import("@/views/file-picker-page.vue"),
-  // },
+  {
+    path: "/file-picker",
+    name: "file-picker",
+    component: () => import("@/views/file-picker-page.vue"),
+  },
   // {
   //   path: "/confirm-info",
   //   name: "confirm-info",
