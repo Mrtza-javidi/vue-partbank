@@ -1,4 +1,3 @@
-// stores/dashboardStore.js
 import { defineStore } from "pinia";
 import axiosInstance from "@/services/axios/axios-config.ts";
 import { enableMocking } from "@/services/axios/mock-axios";
