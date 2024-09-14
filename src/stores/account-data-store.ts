@@ -44,6 +44,7 @@ export const useAccountDataStore = defineStore("account-data", {
             },
           };
           this.data = mockResponse.data;
+          this.isModalVisible = false;
         } else {
           const response = await axiosInstance.get("/deposit-account");
           if (
