@@ -1,9 +1,32 @@
 import { defineStore } from "pinia";
 import axiosInstance from "@/services/axios/axios-config";
 import { enableMocking } from "@/services/axios/mock-axios";
+import { useTransactionsStore } from "@/stores/account-transactions-store";
+
+interface Score {
+  amount: number;
+  paymentPeriod: number;
+}
+
+interface Instalment {
+  amount: number;
+  dueDate: string;
+}
+
+interface AccountDetails {
+  firstName: string;
+  lastName: string;
+  address: string;
+  postalCode: string;
+  balance: number;
+  cardNumber: string;
+  score: Score;
+  upcomingInstalment: Instalment;
+  id: string;
+}
 
 interface AccountData {
-  data: object;
+  data: AccountDetails;
   isModalVisible: boolean;
   isLoading: boolean;
   mockEnabled: boolean;
@@ -11,7 +34,7 @@ interface AccountData {
 
 export const useAccountDataStore = defineStore("account-data", {
   state: (): AccountData => ({
-    data: {},
+    data: {} as AccountDetails,
     isModalVisible: true,
     isLoading: false,
     mockEnabled: true,
@@ -21,10 +44,13 @@ export const useAccountDataStore = defineStore("account-data", {
       this.isLoading = true;
       try {
         if (this.mockEnabled) {
-          const mockResponse = {
-            data: {
-              status: "success",
-              result: {
+          const createAccountData = localStorage.getItem("create-account");
+          const firstName = createAccountData
+            ? JSON.parse(createAccountData).firstName
+            : "";
+          if (firstName) {
+            const mockResponse = {
+              data: {
                 firstName: "مرتضی",
                 lastName: "جاویدی",
                 address: "همین دور و بر",
@@ -41,10 +67,10 @@ export const useAccountDataStore = defineStore("account-data", {
                 },
                 id: "30ab1b8c-4a14-40fc-bd0a-4927c85263ee",
               },
-            },
-          };
-          this.data = mockResponse.data;
-          this.isModalVisible = false;
+            };
+            this.data = mockResponse.data;
+            this.isModalVisible = false;
+          }
         } else {
           const response = await axiosInstance.get("/deposit-account");
           if (
@@ -69,6 +95,13 @@ export const useAccountDataStore = defineStore("account-data", {
     enableMocking(state: boolean): void {
       this.mockEnabled = state;
       enableMocking(state);
+    },
+  },
+  getters: {
+    fullName(state) {
+      if (state.data && state.data.firstName && state.data.lastName) {
+        return `${state.data.firstName} ${state.data.lastName}`;
+      }
     },
   },
   persist: {

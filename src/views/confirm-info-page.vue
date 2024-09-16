@@ -63,6 +63,8 @@
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useCreateAccount } from "@/stores/create-account-store";
+import { useAccountDataStore } from "@/stores/account-data-store.ts";
+import { useTransactionsStore } from "@/stores/account-transactions-store.ts";
 import { useToastStore } from "@/stores/toast-store";
 import { convertToFarsiNumber } from "@/utils/number-formatter";
 import { convertFarsiToEnglishNumbers } from "@/utils/farsi-to-english-number";
@@ -73,9 +75,14 @@ const toastStore = useToastStore();
 
 const loading = ref<boolean>(false);
 
-const formattedPostalCode = computed(() =>
-  convertToFarsiNumber(createAccountStore.postalCode, { useGrouping: false })
-);
+const formattedPostalCode = computed(() => {
+  if (createAccountStore.postalCode === "۰۹۱۵۴۸۳۸۳۴۳") {
+    return convertToFarsiNumber(createAccountStore.postalCode, {
+      useGrouping: false,
+    });
+  }
+  return "۰۹۱۵۴۸۳۸۳۴۳";
+});
 const phoneNumber = localStorage.getItem("phoneNumber");
 
 createAccountStore.enableMocking(true);
@@ -84,18 +91,23 @@ const filePickerPage = () => {
   router.push("/file-picker");
 };
 
+const accountDataStore = useAccountDataStore();
+const transactionsStore = useTransactionsStore();
+
 const submitData = () => {
   loading.value = true;
+  console.log(accountDataStore.data);
 
   setTimeout(() => {
     const convertedPostalCode = convertFarsiToEnglishNumbers(
       createAccountStore.postalCode
     );
     createAccountStore.postalCode = convertedPostalCode;
+
     toastStore.showToast("حساب شما با موفقیت ایجاد شد!", "success");
     router.push("/dashboard");
     loading.value = false;
-  }, 3000);
+  }, 2000);
 };
 </script>
 

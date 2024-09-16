@@ -68,6 +68,9 @@ export const useAuthStore = defineStore("auth", {
         throw error;
       }
     },
+    logout() {
+      this.$reset();
+    },
     enableMocking(state: boolean): void {
       this.mockEnabled = state;
       enableMocking(state);
