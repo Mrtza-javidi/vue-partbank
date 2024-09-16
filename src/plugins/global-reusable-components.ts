@@ -15,7 +15,7 @@ export function registerBaseComponents(app: App): void {
   app.component("BaseSidebarButton", componentLoader.BaseSidebarButton);
 
   // layouts
-  app.component("BaseAccountInfo", componentLoader.BaseAccountInfo);
+  app.component("BaseAccountInfoCard", componentLoader.BaseAccountInfoCard);
   app.component("BaseBankCard", componentLoader.BaseBankCard);
   app.component("BaseFilePicker", componentLoader.BaseFilePicker);
   app.component(
