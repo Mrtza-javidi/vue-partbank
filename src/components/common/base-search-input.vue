@@ -43,6 +43,7 @@ defineProps({
     height: 100%;
     background: none;
     text-align: left;
+    padding: 0 1rem;
   }
 
   &__icon-container {
@@ -50,6 +51,7 @@ defineProps({
     padding: var(--p-1);
     border-radius: 6px 0px 0px 6px;
     background-color: var(--primary-50);
+    height: inherit;
   }
 
   &__icon {
