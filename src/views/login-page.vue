@@ -151,18 +151,6 @@ const handleLogin = () => {
   &__logo {
     width: 9.6rem;
     height: fit-content;
-
-    // &-path-1 {
-    //   fill: var(--primary-500);
-    // }
-
-    // &-path-2 {
-    //   @extend .login-contents-container__logo-path-1;
-    // }
-
-    // &-path-3 {
-    //   fill: var(--primary-300);
-    // }
   }
 
   &__title {

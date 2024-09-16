@@ -24,8 +24,9 @@ export const useAccountDeletionStore = defineStore("account-data", {
       try {
         if (this.mockEnabled) {
           this.data = {};
-          transactionsStore.transactions = [];
-          transactionsStore.count = 0;
+          localStorage.removeItem("account-data");
+          localStorage.removeItem("create-account");
+          localStorage.removeItem("transactions");
           this.isModalVisible = true;
         } else {
           const response = await axiosInstance.delete(`/deposit-account`, {

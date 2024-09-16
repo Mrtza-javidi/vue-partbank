@@ -60,13 +60,17 @@ const visiblePages = computed(() => {
     return Array.from({ length: totalPages }, (_, i) => i + 1);
   }
 
-  if (props.currentPage === 1) {
-    return [1, 2, 3];
+  const pages = [];
+
+  if (currentPage === 1) {
+    pages.push(1, 2, 3);
   } else if (currentPage === totalPages) {
-    return [totalPages - 2, totalPages - 1, totalPages];
+    pages.push(totalPages - 2, totalPages - 1, totalPages);
   } else {
-    return [totalPages - 1, totalPages, totalPages + 1];
+    pages.push(currentPage - 1, currentPage, currentPage + 1);
   }
+
+  return pages;
 });
 
 const changePage = (page: number) => {

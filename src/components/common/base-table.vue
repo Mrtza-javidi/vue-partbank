@@ -1,6 +1,6 @@
 <template>
   <table class="table" :class="tableCustomClass">
-    <thead>
+    <thead class="table__header">
       <slot name="header" />
     </thead>
     <tbody class="table__body">
@@ -26,6 +26,10 @@ defineProps({
     min-width: 40rem;
   }
 
+  &__header {
+    height: 6rem;
+  }
+
   :deep(.table__header-data) {
     @include font-style(
       $size: 1.6rem,
@@ -44,6 +48,7 @@ defineProps({
   }
 
   &__body {
+    height: fit-content;
     @include respond-to(xxs) {
       height: 30rem;
     }

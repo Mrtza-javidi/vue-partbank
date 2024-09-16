@@ -14,7 +14,7 @@ import { useRoute } from "vue-router";
 const props = defineProps({
   to: {
     type: String,
-    required: true,
+    default: "",
   },
   icon: {
     type: Object,
@@ -45,6 +45,7 @@ const buttonClass = computed(() => {
 const iconClass = computed(() => {
   return [
     "sidebar__nav-button-icon",
+    { "sidebar__nav-button-icon--active": isActive.value },
     { "sidebar__nav-button--danger": props.mode === "danger" },
   ];
 });
@@ -73,6 +74,10 @@ const iconClass = computed(() => {
     width: 2rem;
     height: 2rem;
     fill: var(--gray-gray);
+
+    &--active {
+      fill: var(--primary-500);
+    }
   }
 
   &--active {

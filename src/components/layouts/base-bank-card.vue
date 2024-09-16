@@ -50,7 +50,7 @@ const formattedCardNumber = computed(() =>
   height: 26rem;
   padding: var(--p-7) var(--p-5) var(--p-6) var(--p-5);
   border-radius: var(--radius-12);
-  background-image: url("../assets/images/Pattern.png"),
+  background-image: url("@/assets/images/pattern.png"),
     linear-gradient(
       129deg,
       rgba(68, 83, 156, 1) 27%,
@@ -68,7 +68,7 @@ const formattedCardNumber = computed(() =>
     content: "";
     display: block;
     @include position($position: absolute, $bottom: 0, $left: 0);
-    background-image: url("../assets/images/noise.png");
+    background-image: url("@/assets/images/noise.png");
     opacity: 0.06;
     z-index: -1;
   }
