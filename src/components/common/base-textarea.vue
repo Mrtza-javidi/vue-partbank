@@ -107,7 +107,6 @@ const validateInput = () => {
     border-radius: var(--radius-6);
     background: var(--surface-light-blue);
     direction: rtl;
-    // height: 12rem;
     padding: var(--p-3) var(--p-1);
     resize: none;
     border: none;

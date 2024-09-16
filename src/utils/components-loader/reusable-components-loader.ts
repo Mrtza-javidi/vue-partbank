@@ -17,7 +17,10 @@ export const BaseToast = loadComponent("common", "base-toast");
 export const BaseSidebarButton = loadComponent("common", "base-sidebar-button");
 
 //layouts
-export const BaseAccountInfo = loadComponent("layouts", "base-account-info");
+export const BaseAccountInfoCard = loadComponent(
+  "layouts",
+  "base-account-info-card"
+);
 export const BaseBankCard = loadComponent("layouts", "base-bank-card");
 export const BaseFilePicker = loadComponent("layouts", "base-file-picker");
 export const BaseOpenAccountWrapper = loadComponent(

@@ -50,10 +50,10 @@
         </li>
         <li>
           <base-sidebar-button
-            to="/login"
             :icon="IconExit"
             label="خروج"
             mode="danger"
+            @click="logout"
           />
         </li>
       </ul>
@@ -62,6 +62,9 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth-store";
+
 import ElementIcon from "@/components/icons/icon-grid-elements.vue";
 import WalletIcon from "@/components/icons/icon-wallet.vue";
 import iconStrongBox from "@/components/icons/icon-strong-box.vue";
@@ -74,6 +77,14 @@ defineProps({
   userName: String,
   nationalId: String,
 });
+
+const authStore = useAuthStore();
+const router = useRouter();
+
+function logout() {
+  authStore.logout();
+  router.push("/login");
+}
 </script>
 
 <style scoped lang="scss">
