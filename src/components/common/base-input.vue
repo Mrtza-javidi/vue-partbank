@@ -125,7 +125,7 @@ const validateInput = () => {
 
   if (matchedRegex && !matchedRegex.regex.test(modelValue)) {
     error.value = matchedRegex.errmsg;
-    emit("validationCheck", false); // Emit false if the validation fails
+    emit("validationCheck", false);
     return;
   }
 
