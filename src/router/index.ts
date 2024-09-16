@@ -27,11 +27,11 @@ const routes: RouteRecordRaw[] = [
     name: "confirm-info",
     component: () => import("@/views/confirm-info-page.vue"),
   },
-  // {
-  //   path: "/:pathMatch(.*)*",
-  //   name: "not-found",
-  //   component: () => import("@/views/not-found-page.vue"), // Show a NotFound page first
-  // },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () => import("@/views/not-found-page.vue"),
+  },
 ];
 
 const router = createRouter({
