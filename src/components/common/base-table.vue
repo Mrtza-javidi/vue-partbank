@@ -29,7 +29,7 @@ defineProps({
   &__header {
     height: 6rem;
   }
-
+  
   :deep(.table__header-data) {
     @include font-style(
       $size: 1.6rem,
@@ -49,6 +49,7 @@ defineProps({
 
   &__body {
     height: fit-content;
+
     @include respond-to(xxs) {
       height: 30rem;
     }
