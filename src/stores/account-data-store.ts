@@ -92,6 +92,40 @@ export const useAccountDataStore = defineStore("account-data", {
         this.isLoading = false;
       }
     },
+    async deleteBankAccount() {
+      const transactionsStore = useTransactionsStore();
+      this.isLoading = true;
+      try {
+        if (this.mockEnabled) {
+          this.data = {};
+          localStorage.removeItem("account-data");
+          localStorage.removeItem("create-account");
+          localStorage.removeItem("transactions");
+          this.isModalVisible = true;
+        } else {
+          const response = await axiosInstance.delete(`/deposit-account`, {
+            params: { id: this.data.id },
+          });
+
+          if (
+            typeof response.status === "string" &&
+            response.status === "success"
+          ) {
+            this.data = {};
+            transactionsStore.transactions = [];
+            transactionsStore.count = 0;
+            this.isModalVisible = true;
+          } else {
+            throw new Error("Failed to delete bank account.");
+          }
+        }
+      } catch (error) {
+        console.error("Error deleting bank account:", error);
+        throw error;
+      } finally {
+        this.isLoading = false;
+      }
+    },
     enableMocking(state: boolean): void {
       this.mockEnabled = state;
       enableMocking(state);

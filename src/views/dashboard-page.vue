@@ -270,7 +270,6 @@
 import { computed, ref, watch, defineAsyncComponent } from "vue";
 import { useRouter } from "vue-router";
 import { useAccountDataStore } from "@/stores/account-data-store.ts";
-import { useAccountDeletionStore } from "@/stores/account-deletion-store.ts";
 import { useTransactionsStore } from "@/stores/account-transactions-store.ts";
 import { useToastStore } from "@/stores/toast-store";
 import { useClickOutside } from "@/composables/click-outside";
@@ -288,7 +287,6 @@ import { convertFarsiToEnglishNumbers } from "@/utils/farsi-to-english-number";
 
 const router = useRouter();
 const accountDataStore = useAccountDataStore();
-const deleteAccountStore = useAccountDeletionStore();
 const transactionsStore = useTransactionsStore();
 const toastStore = useToastStore();
 
@@ -345,7 +343,7 @@ const deleteBankAccount = () => {
   loading.value = true;
   isMenuActive.value = false;
   setTimeout(() => {
-    deleteAccountStore.deleteBankAccount();
+    accountDataStore.deleteBankAccount();
     toastStore.showToast("حساب شما با موفقیت حذف شد!", "success");
     loading.value = false;
   }, 1000);
