@@ -63,8 +63,6 @@
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useCreateAccount } from "@/stores/create-account-store";
-import { useAccountDataStore } from "@/stores/account-data-store.ts";
-import { useTransactionsStore } from "@/stores/account-transactions-store.ts";
 import { useToastStore } from "@/stores/toast-store";
 import { convertToFarsiNumber } from "@/utils/number-formatter";
 import { convertFarsiToEnglishNumbers } from "@/utils/farsi-to-english-number";
@@ -91,12 +89,8 @@ const filePickerPage = () => {
   router.push("/file-picker");
 };
 
-const accountDataStore = useAccountDataStore();
-const transactionsStore = useTransactionsStore();
-
 const submitData = () => {
   loading.value = true;
-  console.log(accountDataStore.data);
 
   setTimeout(() => {
     const convertedPostalCode = convertFarsiToEnglishNumbers(
