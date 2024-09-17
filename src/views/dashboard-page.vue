@@ -303,8 +303,6 @@ watch(isClickedOutside, (outside) => {
 });
 
 const isModalVisible = computed(() => {
-  console.log(data.value);
-
   return (
     !data.value ||
     (data.value && Object.keys(data.value).length === 0) ||
@@ -328,7 +326,6 @@ const data = computed(() => accountDataStore.data);
 
   if (Object.keys(accountDataStore.data).length === 0) {
     loading.value = true;
-    console.log(loading.value);
     setTimeout(() => {
       accountDataStore.fetchAccountData();
       if (Object.keys(accountDataStore.data).length > 0) {
