@@ -6,19 +6,22 @@
       </div>
       <div class="balance-actions__balance-container">
         <span class="balance-actions__balance-title">موجودی کل</span>
-        <p class="balance-actions__balance-amount">{{}}</p>
+        <p class="balance-actions__balance-amount">{{ formattedBalance }}</p>
       </div>
     </div>
     <div class="card__number">
-      <span>{{}}</span>
-      <span>{{}}</span>
-      <span>{{}}</span>
-      <span>{{}}</span>
+      <span>{{ formattedCardNumber.slice(0, 4) }}</span>
+      <span>{{ formattedCardNumber.slice(4, 8) }}</span>
+      <span>{{ formattedCardNumber.slice(8, 12) }}</span>
+      <span>{{ formattedCardNumber.slice(12) }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+import { convertToFarsiNumber } from "@/utils/number-formatter";
+
 const props = defineProps({
   balance: {
     type: Number,
@@ -29,6 +32,14 @@ const props = defineProps({
     default: "0",
   },
 });
+
+const formattedBalance = computed(() => {
+  return props.balance ? convertToFarsiNumber(props.balance) : "۰";
+});
+
+const formattedCardNumber = computed(() =>
+  props.number ? convertToFarsiNumber(props.number, { useGrouping: false }) : ""
+);
 </script>
 
 <style lang="scss" scoped>
@@ -39,7 +50,7 @@ const props = defineProps({
   height: 26rem;
   padding: var(--p-7) var(--p-5) var(--p-6) var(--p-5);
   border-radius: var(--radius-12);
-  background-image: url("../assets/images/Pattern.png"),
+  background-image: url("@/assets/images/pattern.png"),
     linear-gradient(
       129deg,
       rgba(68, 83, 156, 1) 27%,
@@ -57,7 +68,7 @@ const props = defineProps({
     content: "";
     display: block;
     @include position($position: absolute, $bottom: 0, $left: 0);
-    background-image: url("../assets/images/noise.png");
+    background-image: url("@/assets/images/noise.png");
     opacity: 0.06;
     z-index: -1;
   }

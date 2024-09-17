@@ -1,7 +1,7 @@
 <template>
   <router-link :to="to" class="sidebar__nav-link">
     <button :class="buttonClass">
-      <component :is="icon"></component>
+      <component :is="icon" :customClass="iconClass"></component>
       <span>{{ label }}</span>
     </button>
   </router-link>
@@ -14,7 +14,7 @@ import { useRoute } from "vue-router";
 const props = defineProps({
   to: {
     type: String,
-    required: true,
+    default: "",
   },
   icon: {
     type: Object,
@@ -24,10 +24,7 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  mode: {
-    type: String,
-    default: "",
-  },
+  mode: String,
 });
 
 const route = useRoute();
@@ -41,6 +38,14 @@ const buttonClass = computed(() => {
   return [
     "sidebar__nav-button",
     { "sidebar__nav-button--active": isActive.value },
+    { "sidebar__nav-button--danger": props.mode === "danger" },
+  ];
+});
+
+const iconClass = computed(() => {
+  return [
+    "sidebar__nav-button-icon",
+    { "sidebar__nav-button-icon--active": isActive.value },
     { "sidebar__nav-button--danger": props.mode === "danger" },
   ];
 });
@@ -69,6 +74,10 @@ const buttonClass = computed(() => {
     width: 2rem;
     height: 2rem;
     fill: var(--gray-gray);
+
+    &--active {
+      fill: var(--primary-500);
+    }
   }
 
   &--active {
@@ -83,6 +92,10 @@ const buttonClass = computed(() => {
   &--danger {
     color: var(--fail-500);
     stroke: var(--fail-500);
+
+    &:hover {
+      background-color: lighten(map-get($palette, fail-500), 42%);
+    }
   }
 }
 </style>
